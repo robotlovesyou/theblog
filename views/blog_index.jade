@@ -1,0 +1,5 @@
+extends layout
+block content
+    each article in articles
+        h3.title = article.title
+        div.article-summary = article.summary
