@@ -1,94 +1,73 @@
-'use strict';
-
-// Use mocha as promised to run the behavior tests
-//require("mocha-as-promised")();
-
-//Set node env to test
-process.env.NODE_ENV = 'test';
-
-// Instantiate the app module to start the web server
-require('../../app');
-
-// Use chai and chai as promised for my assertions
-var chai = require("chai");
-var chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
-chai.should();
-
 var Q = require('q');
-var sequelize = require('../../db').sequelize;
-var models = require('../../models')(sequelize);
-sequelize.sync({force: true});
+var marked = require('marked');
 
-// Use the wd library for webdriver
-var wd = require('wd');
+module.exports = function (sequelize, models, browser) {
 
-// Link chai-as-promised and wd promise chaining
-chaiAsPromised.transferPromiseness = wd.transferPromiseness;
+    'use strict';
 
+    var articleFixtures = require('./article_fixtures')(models);
 
-var articleFixtureDocs = [
-    {
-        title: 'I am the title of an article',
-        summary: 'I am the summary of an article',
-        body: 'I am the body of an article'
-    },
-    {
-        title: 'I am also the title of an article',
-        summary: 'I am also the body of an article',
-        body: 'I am also the body of an article'
-    }
-]
+    // Blog Index Suite
+    describe('Blog Index', function () {
 
-function createArticleFixtures() {
-    return Q.all(articleFixtureDocs.map(function (doc) {
-        return models.Article.create(doc);
-    }));
+        beforeEach(function (done) {
+            sequelize.sync({force: true})
+                .then(function () {
+                    return articleFixtures.create();
+                })
+                .then(function () {
+                    return browser.get('http://localhost:3000/blog/');
+                })
+                .then(function () {
+                    done();
+                },
+                function (err) {
+                    done(error);
+                }
+            );
+
+        });
+
+        /**
+         * As a Visitor,
+         * I would like to see summaries and titles of the last few blog posts on the blog index,
+         * so that I can see which scintillating nuggets Andy has gifted to the World.
+         */
+        it('displays a number of article titles on the blog index', function (done) {
+            browser.elementsByCssSelector('.title')
+                .should.eventually.have.length.above(0).notify(done);
+        });
+
+        it('displays the text of an expected title on the blog index', function (done) {
+            browser.elementByCssSelector('body').getAttribute('innerHTML')
+                .should.eventually.match(new RegExp(marked(articleFixtures.docs[0].title))).notify(done);
+        })
+
+        it('displays a number of article summaries on the blog index', function (done) {
+            browser.elementsByCssSelector('.article-summary')
+                .should.eventually.have.length.above(0).notify(done);
+        });
+
+        it('displays the text of an expected summary on the blog index', function (done) {
+            browser.elementByCssSelector('body').getAttribute('innerHTML')
+                .should.eventually.match(new RegExp(marked(articleFixtures.docs[0].summary))).notify(done);
+        });
+
+        /**
+         * As a Visitor,
+         * I would like the title of the Article summary to be a link to the Article page,
+         * so that I can read the Article.
+         */
+        it('has an anchor tag inside the article title', function (done) {
+            browser.elementsByCssSelector('.title a')
+                .should.eventually.have.length.above(0).notify(done);
+        });
+
+        it('should have the correct href in the title anchor', function (done) {
+            browser.elementByCssSelector('.title a').getAttribute('href')
+                .should.eventually.match(new RegExp('http://[^/]+/blog/' + articleFixtures.records[0].id)).notify(done);
+        });
+    });
 }
 
-//browser driver
-var browser = wd.promiseChainRemote();
 
-// Blog Index Suite
-describe('Blog Index', function () {
-
-    // Mocha's 2 second timeout is sometimes a little slow when
-    // webdriver is starting up
-    this.timeout(6000);
-
-    before(function (done) {
-        //Open a browser using webdriver remote
-        browser.init({browserName:'firefox'})
-            .then(function () {
-                done();
-            });
-    });
-
-    beforeEach(function (done) {
-        createArticleFixtures()
-            .then(function () {
-                return browser.get('http://localhost:3000/blog/');
-            })
-            .then(function () {
-                done();
-            });
-
-    });
-
-    after(function (done) {
-        //Quit the browser
-        browser.quit()
-            .then(function () {
-                done();
-            });
-    });
-    
-    /**
-    * As a Visitor, I would like to see summaries of the last few blog posts on the blog index, so
-    * that I can see which scintillating nuggets Andy has gifted to the World.
-    */
-    it('displays a number of article summaries on the blog index', function (done) {
-    	return browser.elementsByCssSelector('.article-summary')
-        .should.eventually.have.length.above(0).notify(done);
-    });
-});

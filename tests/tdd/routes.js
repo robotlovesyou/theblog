@@ -8,4 +8,5 @@ chai.should();
 //Blog Index Route Tests
 describe('Route tests', function () {
     require('./blog_index_route')(sinon);
+    require('./blog_article_route')(sinon);
 });

@@ -1,0 +1,7 @@
+extends layout
+block content
+    h1.title!= fromMarkdown(article.title)
+    div.article-body!= fromMarkdown(article.body)
+    div.comments-explaination
+        span Comments are not yet implemented. Please email feedback to me at&nbsp;
+        a(href='mailto:andy@robotlovesyou.com') andy@robotlovesyou.com

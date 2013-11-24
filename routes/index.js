@@ -1,5 +1,11 @@
-module.exports = function(models) {
+module.exports = function(app, models) {
     'use strict';
+
+    var marked = require('marked');
+
+    app.locals.fromMarkdown = function (text) {
+        return marked(text);
+    };
 
     return {
         /**

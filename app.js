@@ -17,7 +17,7 @@ var models = require('./models')(sequelize);
 sequelize.sync();
 
 //Load routes
-var routes = require('./routes')(models);
+var routes = require('./routes')(app, models);
 
 var blog = routes.blog;
 
@@ -44,6 +44,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/blog', blog.index);
+app.get('/blog/:id', blog.article);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
