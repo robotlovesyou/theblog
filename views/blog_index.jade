@@ -1,5 +1,7 @@
+include mixins/navigation
 extends layout
 block content
+    mixin navigation ()
     each article in articles
         h3.title
             a(href= article.id)!= fromMarkdown(article.title)

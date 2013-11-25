@@ -91,6 +91,17 @@ module.exports = function (sequelize, models, browser) {
                 .should.eventually.exist.notify(done);
         });
 
+        /**
+         * As a Visitor,
+         * I would like to see a navigation menu on a blog Article page,
+         * so that I can navigate to other areas of the web site.
+         */
+        it('has a nvigation div', function (done) {
+            browser.elementByCssSelector('div.navigation')
+                .should.eventually.exist.notify(done);
+        });
+        //Further navigation tests have been factored out into their own suite in ./navigation.js
+
     });
 }
 

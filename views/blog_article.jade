@@ -1,5 +1,7 @@
+include mixins/navigation
 extends layout
 block content
+    mixin navigation ()
     h1.title!= fromMarkdown(article.title)
     div.article-body!= fromMarkdown(article.body)
     div.comments-explaination

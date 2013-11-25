@@ -21,6 +21,8 @@ var routes = require('./routes')(app, models);
 
 var blog = routes.blog;
 
+var contact = routes.contact;
+
 
 
 // all environments
@@ -43,8 +45,9 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/blog', blog.index);
+app.get('/blog/', blog.index);
 app.get('/blog/:id', blog.article);
+app.get('/contact', contact.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

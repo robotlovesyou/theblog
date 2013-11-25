@@ -14,12 +14,17 @@ module.exports = function(app, models) {
          * @param res
          */
         index: function(req, res){
-            res.render('index', { title: 'Express' });
+            res.render('index', { title: 'robotlovesyou.com' });
         },
 
         /**
          * include routes for blog
          */
-        blog: require('./blog')(models)
+        blog: require('./blog')(models),
+
+        /**
+         * include routes for contact
+         */
+        contact: require('./contact')(models)
     };
 };

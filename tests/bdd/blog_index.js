@@ -5,6 +5,8 @@ module.exports = function (sequelize, models, browser) {
 
     'use strict';
 
+    var hostRegExpPattern = '^http://[^/]+'
+
     var articleFixtures = require('./article_fixtures')(models);
 
     // Blog Index Suite
@@ -65,8 +67,20 @@ module.exports = function (sequelize, models, browser) {
 
         it('should have the correct href in the title anchor', function (done) {
             browser.elementByCssSelector('.title a').getAttribute('href')
-                .should.eventually.match(new RegExp('http://[^/]+/blog/' + articleFixtures.records[0].id)).notify(done);
+                .should.eventually.match(new RegExp(hostRegExpPattern + '/blog/' + articleFixtures.records[0].id + '$')).notify(done);
         });
+
+        /**
+         * As a Visitor,
+         * I would like to see a navigation menu on the blog index page,
+         * so that I can navigate to other areas of the web site.
+         */
+        it('should have a naviation div', function (done) {
+            browser.elementByCssSelector('.navigation')
+                .should.eventually.exist.notify(done);
+        });
+
+        //Further navigation tests have been factored out into their own suite in ./navigation.js
     });
 }
 

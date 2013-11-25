@@ -1,5 +1,8 @@
+include mixins/navigation
 extends layout
-
 block content
-  h1= title
-  p Welcome to #{title}
+    img.robotlovesyou(src='/images/robotlovesyou300.png')
+    mixin navigation ()
+    div.explainatory-text
+        img.robot(src='/images/robot150.png')
+        p!= fromMarkdown('Hello. Bit, errm, *functional* round here at the moment isn\'t it? I\'m [blogging the redevelopment of this site](/blog/), and I\'ve only done one release, hence the rather basic state of things.')

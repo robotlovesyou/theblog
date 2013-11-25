@@ -43,6 +43,9 @@ describe('Behaviour Tests', function () {
 
     require('./blog_index.js')(sequelize, models, browser);
     require('./blog_article.js')(sequelize, models, browser);
+    require('./navigation.js')(sequelize, models, browser);
+    require('./home.js')(sequelize, models, browser);
+    require('./contact.js')(sequelize, models, browser);
 
     after(function (done) {
         //Quit the browser
