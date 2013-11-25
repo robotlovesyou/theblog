@@ -1,9 +1,10 @@
-include mixins/navigation
 extends layout
 block content
-    img.robotlovesyou(src='/images/robotlovesyou300.png')
-    mixin navigation ()
-    div email:
-        a.email(href='mailto:andy@robotlovesyou.com') andy@robotlovesyou.com
-    div twitter:
-        a.twitter(href='https://twitter.com/ridiculousGnome') @ridiculousGnome
+    h1.title Contact
+    div.pure-g-r
+        div.pure-u-1-10 email:
+        div.pure-u-9-10
+            a.email.undecorated(href='mailto:andy@robotlovesyou.com') andy@robotlovesyou.com
+        div.pure-u-1-10 twitter:
+        div.pure-u-9-10
+            a.twitter.undecorated(href='https://twitter.com/ridiculousGnome') @ridiculousGnome

@@ -1,0 +1,5 @@
+Clearly, the world is in dire need of another blogging engine, right? OK, perhaps not so much but *I* am very much in need of a website where I can show off my best work and a blog where I can share my ~~opinionated rants~~ thoughts on all things programming.
+
+One thing I would have found very useful when I first started working with node/express is a guide to behaviour and test driven development on the platform. While there is an embarassment of riches when it comes to testing modules it has taken me a few attempts to gather a set of tools which I feel gel nicely together and allow me to put together expressive and readable tests.
+
+In this first post I'm going to cover the modules and patterns I use to develop node using a 'behaviour test - unit test - code' cycle. In future posts I hope to cover subjects such as Authentication, Third Party Integration and Front End UI development, probably using Ember.js

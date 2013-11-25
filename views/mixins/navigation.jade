@@ -1,5 +1,7 @@
 mixin navigation ()
-    div.navigation
+    div.navigation.pure-menu.pure-menu-open
+        a.pure-menu-heading
+            img.robotlovesyou(src='/images/robotlovesyou300.png')
         ul
             li
                 a.home(href='/') home
@@ -7,3 +9,5 @@ mixin navigation ()
                 a.blog(href='/blog/') blog
             li
                 a.contact(href='/contact') contact
+            li.pure-menu-heading
+                img.robot(src='/images/robot150.png')

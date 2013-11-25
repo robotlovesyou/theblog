@@ -1,8 +1,6 @@
-include mixins/navigation
 extends layout
 block content
-    img.robotlovesyou(src='/images/robotlovesyou300.png')
-    mixin navigation ()
     div.explainatory-text
-        img.robot(src='/images/robot150.png')
-        p!= fromMarkdown('Hello. Bit, errm, *functional* round here at the moment isn\'t it? I\'m [blogging the redevelopment of this site](/blog/), and I\'ve only done one release, hence the rather basic state of things.')
+        p!= fromMarkdown('#Hello. \nBit, errm, *functional* round here at the moment isn\'t it? I\'m [blogging the redevelopment of this site](/blog/), and I\'ve only done one release, hence the rather basic state of things.')
+
+

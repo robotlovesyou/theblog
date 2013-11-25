@@ -44,6 +44,11 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// article fixtures
+if('development' == app.get('env') || 'production' == app.get('env')) {
+    require('./production_fixtures')(models).create();
+}
+
 app.get('/', routes.index);
 app.get('/blog/', blog.index);
 app.get('/blog/:id', blog.article);

@@ -1,8 +1,8 @@
-include mixins/navigation
 extends layout
 block content
-    mixin navigation ()
+    h1.title Blog
     each article in articles
         h3.title
-            a(href= article.id)!= fromMarkdown(article.title)
+            a.undecorated(href= article.id)!= fromMarkdown(article.title)
         div.article-summary!= fromMarkdown(article.summary)
+            a.read-more(href= article.id) read more...

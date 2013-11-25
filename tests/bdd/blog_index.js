@@ -81,6 +81,17 @@ module.exports = function (sequelize, models, browser) {
         });
 
         //Further navigation tests have been factored out into their own suite in ./navigation.js
+
+        /**
+         * As a Visitor,
+         * I would like to see a read more link under each blog summary,
+         * so that I can navigate to the blog entry
+         */
+        it('has a read more link under the article summary', function (done) {
+            browser.elementsByCssSelector('a.read-more')
+                .should.eventually.have.length(articleFixtures.docs.length).notify(done);
+        });
+
     });
 }
 
