@@ -39,7 +39,7 @@ So, first things first: like all good little agile software engineers I am going
 
  > As a Visitor, I would like to see a navigation menu on a blog Article page, so that I can navigate to other areas of the web site.
 
-I'm not going to cover the development of every single one of these stories but I will try to go over all the important techniqies in addition to making the full source of each release [available on github](https://github.com/robotlovesyou/robotlovesyou-dot-com/releases) available.
+I'm not going to cover the development of every single one of these stories but I will try to go over all the important techniqies in addition to making the full source of each release [available on github](https://github.com/robotlovesyou/theblog/releases) available.
 
 <a name="GettingStarted"></a>
 ### Getting Started ###
